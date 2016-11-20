@@ -1,0 +1,36 @@
+{
+  "name": "smartinteract",
+  "version": "1.0.0",
+  "description": "smart cli interaction",
+  "main": "dist/index.js",
+  "typings": "dist/index.d.ts",
+  "scripts": {
+    "test": "(npmts)"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+ssh://git@gitlab.com/pushrocks/smartinteract.git"
+  },
+  "keywords": [
+    "interaction",
+    "cli"
+  ],
+  "author": "Lossless GmbH",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://gitlab.com/pushrocks/smartinteract/issues"
+  },
+  "homepage": "https://gitlab.com/pushrocks/smartinteract#README",
+  "dependencies": {
+    "@types/node": "^6.0.48",
+    "@types/q": "0.0.32",
+    "@types/should": "^8.1.30",
+    "lik": "^1.0.27",
+    "q": "^1.4.1",
+    "should": "^11.1.1",
+    "typings-global": "^1.0.14"
+  },
+  "devDependencies": {
+    "typings-test": "^1.0.3"
+  }
+}
