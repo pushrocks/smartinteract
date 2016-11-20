@@ -22,9 +22,11 @@
   },
   "homepage": "https://gitlab.com/pushrocks/smartinteract#README",
   "dependencies": {
+    "@types/inquirer": "0.0.31",
     "@types/node": "^6.0.48",
     "@types/q": "0.0.32",
     "@types/should": "^8.1.30",
+    "inquirer": "^1.2.3",
     "lik": "^1.0.27",
     "q": "^1.4.1",
     "should": "^11.1.1",
