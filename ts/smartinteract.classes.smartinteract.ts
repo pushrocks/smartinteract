@@ -14,12 +14,13 @@ export interface IQuestionObject {
     type: questionType
     message: string
     default: any
-    choices: string[] | IChoiceObject[]
-    validate: IValidateFunction
+    choices?: string[] | IChoiceObject[]
+    validate?: IValidateFunction
 }
 
 export interface IAnswerObject {
-
+    name: string,
+    value: any
 }
 
 export interface IValidateFunction {
@@ -30,7 +31,7 @@ export interface IValidateFunction {
  * class SmartInteract - allows to specify an user interaction during runtime
  */
 export class SmartInteract {
-    
+
     /**
      * holds  the qestion queue, that is emptied once you call 
      */
@@ -48,19 +49,30 @@ export class SmartInteract {
      * allows you to ask a single question and returns the answer in a promise
      * skips the queue
      */
-    askQuestion(optionsArg: IQuestionObject): q.Promise<IAnswerObject[]> {
-        let done = q.defer<IAnswerObject[]>()
-        plugins.inquirer.prompt([{
-            name: optionsArg.name,
-            type: optionsArg.type,
-            message: optionsArg.message,
-            default: optionsArg.default,
-            choices: optionsArg.choices,
-            validate: optionsArg.validate
-        }]).then((answers: IAnswerObject[]) => {
-            console.log(answers)
-            done.resolve(answers)
-        })
+    askQuestion(optionsArg: IQuestionObject): q.Promise<IAnswerObject> {
+        let done = q.defer<IAnswerObject>()
+        if (this.isValidEnv()) {
+            plugins.inquirer.prompt([{
+                name: optionsArg.name,
+                type: optionsArg.type,
+                message: optionsArg.message,
+                default: optionsArg.default,
+                choices: optionsArg.choices,
+                validate: optionsArg.validate
+            }]).then((answers: IAnswerObject[]) => {
+                done.resolve({
+                    name: optionsArg.name,
+                    value: answers[optionsArg.name]
+                })
+            })
+        } else {
+            let answer: IAnswerObject = {
+                name: optionsArg.name,
+                value: optionsArg.default
+            }
+            done.resolve(answer)
+        }
+
         return done.promise
     }
 
@@ -75,20 +87,62 @@ export class SmartInteract {
      * run the  question queue
      */
     runQueue() {
-        let done = q.defer<IAnswerObject[]>()
-        let answerMap = new Objectmap<IAnswerObject>()
+        let done = q.defer<AnswerBucket>()
+        let answerBucket = new AnswerBucket()
         let handleQuestion = () => {
             let oneQuestion = this.questionMap.getOneAndRemove()
-            this.askQuestion(oneQuestion).then(x => {
-                answerMap.addArray(x)
+            this.askQuestion(oneQuestion).then((answerArg: IAnswerObject) => {
+                answerBucket.addAnswer(answerArg)
                 if (!this.questionMap.isEmpty()) {
                     handleQuestion() // recursion: as questions until empty
                 } else {
-                    done.resolve(answerMap.getArray()) // when empty, then resolve promise
+                    done.resolve(answerBucket) // when empty, then resolve promise
                 }
             })
         }
         handleQuestion()
         return done.promise
+    }
+
+    /**
+     * checks if the current env is valid for userinput
+     */
+    private isValidEnv(): boolean {
+        if (!process.env.CI) {
+            return true
+        } else {
+            return false
+        }
+    }
+}
+
+/**
+ * class AnswerBucket holds answers
+ */
+export class AnswerBucket {
+    answerMap = new Objectmap<IAnswerObject>()
+
+    /**
+     * add an answer to the bucket
+     */
+    addAnswer(answerArg: IAnswerObject) {
+        this.answerMap.add(answerArg)
+    }
+
+    /**
+     * gets an answer for a specific name
+     */
+    getAnswerFor(nameArg: string) {
+        let answer = this.answerMap.find(answerArg => {
+            return answerArg.name === nameArg
+        })
+        return answer.value
+    }
+
+    /**
+     * gets all answers as array
+     */
+    getAllAnswers() {
+        return this.answerMap.getArray()
     }
 }
