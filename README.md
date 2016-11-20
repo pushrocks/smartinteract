@@ -37,3 +37,5 @@ SmartInteract.runQueue()
     })
 
 ```
+
+[![npm](https://push.rocks/assets/repo-header.svg)](https://push.rocks)
