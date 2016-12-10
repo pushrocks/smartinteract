@@ -30,15 +30,15 @@ let myInteract = new SmartInteract([{ // note: its an array. You can specify mul
     default: 'Somebody',
     validate: (inputString) => { return true } // implement your own validation
 }])
-SmartInteract.addQuestions([ ... ]) // add more questions
-SmartInteract.runQueue()
+myInteract.addQuestions([ ... ]) // add more questions
+myInteract.runQueue()
     .then(answerBucket => { // the bucket has all the answers of the completed queue
         let answerQuestion1 = answerBucket.getAnswerFor('question1')
         // do something with the answers
     })
 
 // alternatively use .askQuestion() for more direct control
-SmartInteract.askQuestion{ // note: its an array. You can specify multiple questions
+myInteract.askQuestion{ // note: its an array. You can specify multiple questions
     name: 'question2',
     type: 'confirm',
     message: 'Do you speak English?',
