@@ -1,5 +1,3 @@
-/// <reference types="q" />
-import * as q from 'q';
 import { Objectmap } from 'lik';
 export declare type questionType = 'input' | 'confirm' | 'list' | 'rawlist' | 'expand' | 'checkbox' | 'password' | 'editor';
 export interface IChoiceObject {
@@ -37,7 +35,7 @@ export declare class SmartInteract {
      * allows you to ask a single question and returns the answer in a promise
      * skips the queue
      */
-    askQuestion(optionsArg: IQuestionObject): q.Promise<IAnswerObject>;
+    askQuestion(optionsArg: IQuestionObject): Promise<IAnswerObject>;
     /**
      * add questions to queue
      */
@@ -45,7 +43,7 @@ export declare class SmartInteract {
     /**
      * run the  question queue
      */
-    runQueue(): q.Promise<AnswerBucket>;
+    runQueue(): Promise<AnswerBucket>;
     /**
      * checks if the current env is valid for userinput
      */
