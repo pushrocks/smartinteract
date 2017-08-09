@@ -5,7 +5,8 @@
   "main": "dist/index.js",
   "typings": "dist/index.d.ts",
   "scripts": {
-    "test": "(npmts)"
+    "test": "(npmts)",
+    "testLocal": "(npmts --notest && ts-node --compilerOptions '{\"target\":\"es6\"}' test/test.ts)"
   },
   "repository": {
     "type": "git",

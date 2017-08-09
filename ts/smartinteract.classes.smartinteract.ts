@@ -60,10 +60,18 @@ export class SmartInteract {
         choices: optionsArg.choices,
         validate: optionsArg.validate
       }]).then((answers: IAnswerObject[]) => {
+        // adjust to the fact that now dots define paths for inquirer
+        let answerValue: any = answers
+        let nameArray = optionsArg.name.split('.')
+        for (let name of nameArray) {
+          answerValue = answerValue[name]
+        }
         done.resolve({
           name: optionsArg.name,
-          value: answers[ optionsArg.name ]
+          value: answerValue
         })
+      }).catch(err => {
+        console.log(err)
       })
     } else {
       let answer: IAnswerObject = {
