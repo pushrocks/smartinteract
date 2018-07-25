@@ -15,6 +15,9 @@ export type questionType =
   | 'password'
   | 'editor';
 
+/**
+ * a choice 
+ */
 export interface IChoiceObject {
   name: string;
   value: any;
