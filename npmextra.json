@@ -3,5 +3,6 @@
         "globalNpmTools": [
             "npmts"
         ]
-    }
+    },
+    "npmAccessLevel": "public"
 }

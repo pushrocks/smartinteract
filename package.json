@@ -1,12 +1,14 @@
 {
-  "name": "smartinteract",
+  "name": "@pushrocks/smartinteract",
+  "private": false,
   "version": "1.0.10",
   "description": "smart cli interaction",
   "main": "dist/index.js",
   "typings": "dist/index.d.ts",
   "scripts": {
-    "test": "(npmts)",
-    "testLocal": "(npmts --notest && ts-node --compilerOptions '{\"target\":\"es6\"}' test/test.ts)"
+    "test": "tsrun test/test.ts",
+    "testLocal": "(npmts --notest && ts-node --compilerOptions '{\"target\":\"es6\"}' test/test.ts)",
+    "build": "(npmts --notest)"
   },
   "repository": {
     "type": "git",
@@ -23,15 +25,13 @@
   },
   "homepage": "https://gitlab.com/pushrocks/smartinteract#README",
   "dependencies": {
-    "@types/inquirer": "0.0.35",
-    "@types/q": "1.0.3",
-    "inquirer": "^3.2.1",
-    "lik": "^1.0.38",
-    "q": "^1.5.0",
-    "smartq": "^1.1.6",
-    "typings-global": "^1.0.20"
+    "@pushrocks/lik": "^3.0.1",
+    "@pushrocks/smartpromise": "^2.0.5",
+    "@types/inquirer": "0.0.42",
+    "inquirer": "^6.0.0"
   },
   "devDependencies": {
-    "tapbundle": "^1.1.1"
+    "@gitzone/tsrun": "^1.1.9",
+    "@pushrocks/tapbundle": "^3.0.1"
   }
 }
