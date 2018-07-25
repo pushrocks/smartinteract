@@ -1,8 +1,6 @@
 {
-    "npmci": {
-        "globalNpmTools": [
-            "npmts"
-        ]
-    },
-    "npmAccessLevel": "public"
+  "npmci": {
+    "npmGlobalTools": ["npmts"]
+  },
+  "npmAccessLevel": "public"
 }
