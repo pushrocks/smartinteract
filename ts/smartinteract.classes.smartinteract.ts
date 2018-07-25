@@ -1,5 +1,5 @@
 import * as plugins from './smartinteract.plugins';
-import * as smartq from 'smartq';
+import * as smartpromise from '@pushrocks/smartpromise';
 import { Objectmap } from '@pushrocks/lik';
 
 /**
@@ -63,7 +63,7 @@ export class SmartInteract {
    * skips the queue
    */
   askQuestion(optionsArg: IQuestionObject): Promise<IAnswerObject> {
-    let done = smartq.defer<IAnswerObject>();
+    let done = smartpromise.defer<IAnswerObject>();
     if (this.isValidEnv()) {
       plugins.inquirer
         .prompt([
@@ -113,7 +113,7 @@ export class SmartInteract {
    * run the  question queue
    */
   runQueue() {
-    let done = smartq.defer<AnswerBucket>();
+    let done = smartpromise.defer<AnswerBucket>();
     let answerBucket = new AnswerBucket();
     let handleQuestion = async () => {
       if (!this.questionMap.isEmpty()) {
