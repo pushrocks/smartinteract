@@ -25,9 +25,36 @@ smart cli interaction
 
 Use TypeScript for best in class instellisense.
 
+```javascript
+import { SmartInteract } from 'smartinteract'
 
+let myInteract = new SmartInteract([{ // note: its an array. You can specify multiple questions
+    name: 'question1',
+    type: 'input',
+    message: 'Who are you?',
+    default: 'Somebody',
+    validate: (inputString) => { return true } // implement your own validation
+}])
+myInteract.addQuestions([ ... ]) // add more questions
+myInteract.runQueue()
+    .then(answerBucket => { // the bucket has all the answers of the completed queue
+        let answerQuestion1 = answerBucket.getAnswerFor('question1')
+        // do something with the answers
+    })
 
-For further information read the linked docs at the top of this README.
+// alternatively use .askQuestion() for more direct control
+myInteract.askQuestion{ // note: its an array. You can specify multiple questions
+    name: 'question2',
+    type: 'confirm',
+    message: 'Do you speak English?',
+    default: true,
+    validate: (inputString) => { return true } // implement your own validation
+}().then(answerObject => {
+    // answerObject looks like { name: 'question2', value: true }
+})
+```
+
+For further information read the linked docs at the top of this readme.
 
 > MIT licensed | **&copy;** [Lossless GmbH](https://lossless.gmbh)
 > | By using this npm module you agree to our [privacy policy](https://lossless.gmbH/privacy.html)
