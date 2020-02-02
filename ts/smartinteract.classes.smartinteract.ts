@@ -1,6 +1,6 @@
 import * as plugins from './smartinteract.plugins';
 import * as smartpromise from '@pushrocks/smartpromise';
-import { Objectmap } from '@pushrocks/lik';
+import { AnswerBucket } from './smartinteract.classes.answerbucket';
 
 /**
  * the availeable question types
@@ -48,7 +48,7 @@ export class SmartInteract {
   /**
    * holds  the qestion queue, that is emptied once you call
    */
-  private questionMap = new Objectmap<IQuestionObject>();
+  private questionMap = new plugins.lik.Objectmap<IQuestionObject>();
 
   /**
    * constructor of class SmartInteract
@@ -76,13 +76,9 @@ export class SmartInteract {
             validate: optionsArg.validate
           }
         ])
-        .then((answers: IAnswerObject[]) => {
+        .then((answers) => {
           // adjust to the fact that now dots define paths for inquirer
-          let answerValue: any = answers;
-          let nameArray = optionsArg.name.split('.');
-          for (let name of nameArray) {
-            answerValue = answerValue[name];
-          }
+          let answerValue = plugins.smartparam.smartGet(answers, optionsArg.name);
           done.resolve({
             name: optionsArg.name,
             value: answerValue
@@ -138,36 +134,5 @@ export class SmartInteract {
     } else {
       return false;
     }
-  }
-}
-
-/**
- * class AnswerBucket holds answers
- */
-export class AnswerBucket {
-  answerMap = new Objectmap<IAnswerObject>();
-
-  /**
-   * add an answer to the bucket
-   */
-  addAnswer(answerArg: IAnswerObject) {
-    this.answerMap.add(answerArg);
-  }
-
-  /**
-   * gets an answer for a specific name
-   */
-  getAnswerFor(nameArg: string) {
-    let answer = this.answerMap.find(answerArg => {
-      return answerArg.name === nameArg;
-    });
-    return answer.value;
-  }
-
-  /**
-   * gets all answers as array
-   */
-  getAllAnswers() {
-    return this.answerMap.getArray();
   }
 }

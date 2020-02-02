@@ -30,14 +30,14 @@ tap.test('should add question to SmartInteract instance', async () => {
     {
       name: 'some.dotted.name',
       type: 'input',
-      message: 'what is your second favourite color? Answer is red',
+      message: 'what is your second favourite color? Answer is aValidAnswer',
       default: 'aValidAnswer'
     }
   ]);
 });
 
 tap.test('should use default value when not in CI', async () => {
-  let answerBucket = await testInteract.runQueue();
+  const answerBucket = await testInteract.runQueue();
   expect(answerBucket.getAnswerFor('testQuestion1')).to.equal('blue');
   expect(answerBucket.getAnswerFor('testQuestion2')).to.equal('red');
   expect(answerBucket.getAnswerFor('some.dotted.name')).to.equal('aValidAnswer');

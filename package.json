@@ -25,13 +25,16 @@
   },
   "homepage": "https://gitlab.com/pushrocks/smartinteract#README",
   "dependencies": {
-    "@pushrocks/lik": "^3.0.1",
-    "@pushrocks/smartpromise": "^2.0.5",
-    "@types/inquirer": "0.0.42",
-    "inquirer": "^6.0.0"
+    "@pushrocks/lik": "^3.0.13",
+    "@pushrocks/smartparam": "^1.1.6",
+    "@pushrocks/smartpromise": "^3.0.6",
+    "@types/inquirer": "^6.5.0",
+    "inquirer": "^7.0.4"
   },
   "devDependencies": {
-    "@gitzone/tsrun": "^1.1.9",
-    "@pushrocks/tapbundle": "^3.0.1"
+    "@gitzone/tsrun": "^1.2.8",
+    "@pushrocks/tapbundle": "^3.2.0",
+    "tslint": "^6.0.0",
+    "tslint-config-prettier": "^1.18.0"
   }
 }
