@@ -5,20 +5,20 @@ import { IAnswerObject } from './smartinteract.classes.smartinteract';
  * class AnswerBucket holds answers
  */
 export class AnswerBucket {
-  answerMap = new plugins.lik.Objectmap<IAnswerObject>();
+  private answerMap = new plugins.lik.Objectmap<IAnswerObject>();
 
   /**
    * add an answer to the bucket
    */
-  addAnswer(answerArg: IAnswerObject) {
+  public addAnswer(answerArg: IAnswerObject) {
     this.answerMap.add(answerArg);
   }
 
   /**
    * gets an answer for a specific name
    */
-  getAnswerFor(nameArg: string) {
-    let answer = this.answerMap.find(answerArg => {
+  public getAnswerFor(nameArg: string) {
+    const answer = this.answerMap.find(answerArg => {
       return answerArg.name === nameArg;
     });
     return answer ? answer.value : null;
@@ -27,7 +27,7 @@ export class AnswerBucket {
   /**
    * gets all answers as array
    */
-  getAllAnswers() {
+  public getAllAnswers() {
     return this.answerMap.getArray();
   }
 }
