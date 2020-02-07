@@ -1,5 +1,11 @@
-import { Objectmap } from 'lik';
+import { AnswerBucket } from './smartinteract.classes.answerbucket';
+/**
+ * the availeable question types
+ */
 export declare type questionType = 'input' | 'confirm' | 'list' | 'rawlist' | 'expand' | 'checkbox' | 'password' | 'editor';
+/**
+ * a choice
+ */
 export interface IChoiceObject {
     name: string;
     value: any;
@@ -47,23 +53,5 @@ export declare class SmartInteract {
     /**
      * checks if the current env is valid for userinput
      */
-    private isValidEnv();
-}
-/**
- * class AnswerBucket holds answers
- */
-export declare class AnswerBucket {
-    answerMap: Objectmap<IAnswerObject>;
-    /**
-     * add an answer to the bucket
-     */
-    addAnswer(answerArg: IAnswerObject): void;
-    /**
-     * gets an answer for a specific name
-     */
-    getAnswerFor(nameArg: string): any;
-    /**
-     * gets all answers as array
-     */
-    getAllAnswers(): IAnswerObject[];
+    private isValidEnv;
 }
