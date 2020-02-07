@@ -1,6 +1,17 @@
 {
+  "gitzone": {
+    "projectType": "npm",
+    "module": {
+      "githost": {},
+      "gitscope": {},
+      "gitrepo": {},
+      "shortDescription": {},
+      "npmPackagename": {},
+      "license": {}
+    }
+  },
   "npmci": {
-    "npmGlobalTools": ["npmts"],
+    "npmGlobalTools": [],
     "npmAccessLevel": "public"
   }
 }

@@ -16,7 +16,7 @@ export type questionType =
   | 'editor';
 
 /**
- * a choice 
+ * a choice
  */
 export interface IChoiceObject {
   name: string;
@@ -63,7 +63,7 @@ export class SmartInteract {
    * skips the queue
    */
   askQuestion(optionsArg: IQuestionObject): Promise<IAnswerObject> {
-    let done = smartpromise.defer<IAnswerObject>();
+    const done = smartpromise.defer<IAnswerObject>();
     if (this.isValidEnv()) {
       plugins.inquirer
         .prompt([
@@ -76,9 +76,9 @@ export class SmartInteract {
             validate: optionsArg.validate
           }
         ])
-        .then((answers) => {
+        .then(answers => {
           // adjust to the fact that now dots define paths for inquirer
-          let answerValue = plugins.smartparam.smartGet(answers, optionsArg.name);
+          const answerValue = plugins.smartparam.smartGet(answers, optionsArg.name);
           done.resolve({
             name: optionsArg.name,
             value: answerValue
@@ -88,7 +88,7 @@ export class SmartInteract {
           console.log(err);
         });
     } else {
-      let answer: IAnswerObject = {
+      const answer: IAnswerObject = {
         name: optionsArg.name,
         value: optionsArg.default
       };
@@ -109,12 +109,12 @@ export class SmartInteract {
    * run the  question queue
    */
   runQueue() {
-    let done = smartpromise.defer<AnswerBucket>();
-    let answerBucket = new AnswerBucket();
-    let handleQuestion = async () => {
+    const done = smartpromise.defer<AnswerBucket>();
+    const answerBucket = new AnswerBucket();
+    const handleQuestion = async () => {
       if (!this.questionMap.isEmpty()) {
-        let oneQuestion = this.questionMap.getOneAndRemove();
-        let answer: IAnswerObject = await this.askQuestion(oneQuestion);
+        const oneQuestion = this.questionMap.getOneAndRemove();
+        const answer: IAnswerObject = await this.askQuestion(oneQuestion);
         answerBucket.addAnswer(answer);
         handleQuestion(); // recursion: as questions until empty
       } else {
