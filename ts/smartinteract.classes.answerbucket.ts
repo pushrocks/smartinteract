@@ -5,7 +5,7 @@ import { IAnswerObject } from './smartinteract.classes.smartinteract';
  * class AnswerBucket holds answers
  */
 export class AnswerBucket {
-  private answerMap = new plugins.lik.Objectmap<IAnswerObject>();
+  private answerMap = new plugins.lik.ObjectMap<IAnswerObject>();
 
   /**
    * add an answer to the bucket
@@ -18,7 +18,7 @@ export class AnswerBucket {
    * gets an answer for a specific name
    */
   public getAnswerFor(nameArg: string) {
-    const answer = this.answerMap.find(answerArg => {
+    const answer = this.answerMap.find((answerArg) => {
       return answerArg.name === nameArg;
     });
     return answer ? answer.value : null;

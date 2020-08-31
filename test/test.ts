@@ -9,30 +9,35 @@ tap.test('should create a valid new instance', async () => {
   expect(testInteract).to.be.instanceOf(smartinteract.SmartInteract);
 });
 
+tap.test('should get a simple confirmation', async () => {
+  const response = await smartinteract.SmartInteract.getCliConfirmation('You feel awesome, right?', true);
+  expect(response).to.be.true;
+});
+
 tap.test('should add question to SmartInteract instance', async () => {
   testInteract.addQuestions([
     {
       name: 'testQuestion1',
       type: 'input',
       message: 'what is your favourite color? Answer is blue',
-      default: 'blue'
-    }
+      default: 'blue',
+    },
   ]);
   testInteract.addQuestions([
     {
       name: 'testQuestion2',
       type: 'input',
       message: 'what is your second favourite color? Answer is red',
-      default: 'red'
-    }
+      default: 'red',
+    },
   ]);
   testInteract.addQuestions([
     {
       name: 'some.dotted.name',
       type: 'input',
       message: 'what is your second favourite color? Answer is aValidAnswer',
-      default: 'aValidAnswer'
-    }
+      default: 'aValidAnswer',
+    },
   ]);
 });
 

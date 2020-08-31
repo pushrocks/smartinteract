@@ -45,10 +45,23 @@ export interface IValidateFunction {
  * class SmartInteract - allows to specify an user interaction during runtime
  */
 export class SmartInteract {
+  // STATIC
+  public static async getCliConfirmation(questionArg: string, defaultArg: boolean): Promise<boolean> {
+    const smartinteractInstance = new SmartInteract();
+    const response = await smartinteractInstance.askQuestion({
+      default: defaultArg,
+      message: questionArg,
+      name: 'question',
+      type: 'confirm'
+    });
+    return response.value;
+  };
+
+  // INSTANCE
   /**
    * holds  the qestion queue, that is emptied once you call
    */
-  private questionMap = new plugins.lik.Objectmap<IQuestionObject>();
+  private questionMap = new plugins.lik.ObjectMap<IQuestionObject>();
 
   /**
    * constructor of class SmartInteract
@@ -73,24 +86,24 @@ export class SmartInteract {
             message: optionsArg.message,
             default: optionsArg.default,
             choices: optionsArg.choices,
-            validate: optionsArg.validate
-          }
+            validate: optionsArg.validate,
+          },
         ])
-        .then(answers => {
+        .then((answers) => {
           // adjust to the fact that now dots define paths for inquirer
           const answerValue = plugins.smartparam.smartGet(answers, optionsArg.name);
           done.resolve({
             name: optionsArg.name,
-            value: answerValue
+            value: answerValue,
           });
         })
-        .catch(err => {
+        .catch((err) => {
           console.log(err);
         });
     } else {
       const answer: IAnswerObject = {
         name: optionsArg.name,
-        value: optionsArg.default
+        value: optionsArg.default,
       };
       done.resolve(answer);
     }
