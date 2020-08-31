@@ -10,7 +10,10 @@ tap.test('should create a valid new instance', async () => {
 });
 
 tap.test('should get a simple confirmation', async () => {
-  const response = await smartinteract.SmartInteract.getCliConfirmation('You feel awesome, right?', true);
+  const response = await smartinteract.SmartInteract.getCliConfirmation(
+    'You feel awesome, right?',
+    true
+  );
   expect(response).to.be.true;
 });
 

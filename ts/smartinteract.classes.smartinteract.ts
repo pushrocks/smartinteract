@@ -46,16 +46,19 @@ export interface IValidateFunction {
  */
 export class SmartInteract {
   // STATIC
-  public static async getCliConfirmation(questionArg: string, defaultArg: boolean): Promise<boolean> {
+  public static async getCliConfirmation(
+    questionArg: string,
+    defaultArg: boolean
+  ): Promise<boolean> {
     const smartinteractInstance = new SmartInteract();
     const response = await smartinteractInstance.askQuestion({
       default: defaultArg,
       message: questionArg,
       name: 'question',
-      type: 'confirm'
+      type: 'confirm',
     });
     return response.value;
-  };
+  }
 
   // INSTANCE
   /**

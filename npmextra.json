@@ -2,12 +2,12 @@
   "gitzone": {
     "projectType": "npm",
     "module": {
-      "githost": {},
-      "gitscope": {},
-      "gitrepo": {},
-      "shortDescription": {},
-      "npmPackagename": {},
-      "license": {}
+      "githost": "gitlab.com",
+      "gitscope": "pushrocks",
+      "gitrepo": "smartinteract",
+      "shortDescription": "smart cli interaction",
+      "npmPackagename": "@pushrocks/smartinteract",
+      "license": "MIT"
     }
   },
   "npmci": {
